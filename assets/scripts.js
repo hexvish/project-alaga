@@ -54,22 +54,29 @@ function initNavigation() {
 /**
  * Fade-in effect on scroll
  */
+/**
+ * Fade-in effect on scroll
+ */
 function initIntersectionObserver() {
-    const faders = document.querySelectorAll(".fade-in");
-    const appearOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
+    window.observeElements = (elements) => {
+        const appearOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add("reveal-visible");
+                observer.unobserve(entry.target);
+            });
+        }, appearOptions);
+
+        elements.forEach(el => appearOnScroll.observe(el));
     };
 
-    const appearOnScroll = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-        });
-    }, appearOptions);
-
-    faders.forEach(fader => appearOnScroll.observe(fader));
+    const faders = document.querySelectorAll(".reveal-base");
+    window.observeElements(faders);
 }
 
 /**
@@ -82,7 +89,7 @@ function initFAQ() {
         question.addEventListener("click", () => {
             const answer = question.nextElementSibling;
             const icon = question.querySelector("i");
-            
+
             // Toggle answer
             if (answer.style.maxHeight) {
                 answer.style.maxHeight = null;
@@ -91,7 +98,7 @@ function initFAQ() {
                 // Close others
                 document.querySelectorAll(".faq-answer").forEach(a => a.style.maxHeight = null);
                 document.querySelectorAll(".faq-question i").forEach(i => i.classList.replace("fa-minus", "fa-plus"));
-                
+
                 answer.style.maxHeight = answer.scrollHeight + "px";
                 icon.classList.replace("fa-plus", "fa-minus");
             }
@@ -114,13 +121,19 @@ function initGallery() {
     // Set up gallery layout
     galleryContainer.innerHTML = `
         <div class="text-center" style="margin-bottom: 4rem;">
-            <p class="text-uppercase">Our Collection</p>
-            <h2 style="font-size: 3rem;">Selected Pieces</h2>
-            <div class="gallery-tabs" style="margin-top: 2rem; display: flex; justify-content: center; gap: 2rem;">
+            <p class="text-uppercase reveal-base reveal-up">Our Collection</p>
+            <h2 style="font-size: 3rem;" class="reveal-base reveal-up stagger-1">Selected Pieces</h2>
+            <div class="gallery-tabs reveal-base reveal-up stagger-2" style="margin-top: 2rem; display: flex; justify-content: center; gap: 2rem;">
             </div>
         </div>
-        <div id="gallery-grid" class="grid fade-in"></div>
+        <div id="gallery-grid" class="grid"></div>
     `;
+
+    // Observe newly created header elements
+    if (window.observeElements) {
+        const newReveals = galleryContainer.querySelectorAll(".text-center .reveal-base");
+        window.observeElements(newReveals);
+    }
 
     const tabsContainer = galleryContainer.querySelector(".gallery-tabs");
     const grid = galleryContainer.querySelector("#gallery-grid");
@@ -137,13 +150,13 @@ function initGallery() {
         btn.style.paddingBottom = "5px";
         btn.style.borderBottom = index === 0 ? "2px solid #000" : "2px solid transparent";
         btn.dataset.category = cat;
-        
+
         btn.addEventListener("click", () => {
             document.querySelectorAll(".gallery-tabs button").forEach(b => b.style.borderBottom = "2px solid transparent");
             btn.style.borderBottom = "2px solid #000";
             renderCategory(cat, grid);
         });
-        
+
         tabsContainer.appendChild(btn);
     });
 
@@ -153,13 +166,22 @@ function initGallery() {
 
 function renderCategory(category, container) {
     const items = galleryData[category];
+
+    // Fade out current content
     container.style.opacity = "0";
-    
+    container.style.transition = "opacity 0.2s ease-out";
+
     setTimeout(() => {
         container.innerHTML = "";
-        items.forEach(item => {
+        container.style.opacity = "1"; // Reset container opacity
+
+        const newCards = [];
+        items.forEach((item, index) => {
             const card = document.createElement("div");
-            card.className = "card";
+            // Add staggering classes based on index (1-5)
+            const staggerDelay = (index % 5) + 1;
+
+            card.className = `card reveal-base reveal-up stagger-${staggerDelay}`;
             card.innerHTML = `
                 <div class="card-image">
                     <img src="${item.img}" alt="${item.title}">
@@ -171,8 +193,12 @@ function renderCategory(category, container) {
                 </div>
             `;
             container.appendChild(card);
+            newCards.push(card);
         });
-        container.style.opacity = "1";
-        container.classList.add("visible");
+
+        // Observe the new cards
+        if (window.observeElements) {
+            window.observeElements(newCards);
+        }
     }, 200);
 }
