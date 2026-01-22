@@ -4,17 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery - ALAGA</title>
+  <title>Gallery | ALAGA</title>
 
-  <!-- Google Fonts + Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-
-  <!-- Materialize CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
   <!-- Custom Styles -->
   <link rel="stylesheet" href="../assets/styles.css">
@@ -22,68 +20,62 @@
 
 <body>
 
-  <!-- NAVIGATION (replace your current nav) -->
-  <nav id="siteNav" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="../index.html" id="navLogo" class="nav-logo">
-        <img src="https://picsum.photos/140/44?random=12" alt="ALAGA Logo">
-      </a>
+  <!-- Navigation -->
+  <nav id="siteNav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-logo">ALAGA</a>
 
-      <!-- Toggle button (mobile) -->
-      <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-        <span class="hamburger" aria-hidden="true"></span>
+      <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
       </button>
 
-      <!-- Links -->
-      <ul id="navLinks" class="nav-links" role="menubar" aria-hidden="true">
-        <li role="none"><a role="menuitem" href="../index.html" class="nav-link">Home</a></li>
-        <li role="none"><a role="menuitem" href="gallery/index.html" class="nav-link active">Gallery</a></li>
-        <li role="none"><a role="menuitem" href="../contact/index.html" class="nav-link">Contact</a></li>
+      <ul id="navLinks" class="nav-links">
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html" class="nav-link active">Gallery</a></li>
+        <li><a href="../contact/index.html" class="nav-link">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-
-  <!-- Gallery Section -->
-  <div class="container section gallery" id="gallery"></div>
-
-
+  <!-- Gallery Content -->
+  <section class="gallery-page">
+    <div class="container" id="gallery">
+      <!-- Gallery data will be injected here by scripts.js -->
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer>
     <div class="container">
-      <div class="footer-row">
-        <!-- Contact Column -->
-        <div class="footer-col contact">
-          <h5>Contact Us</h5>
-          <p><i class="fas fa-map-marker-alt"></i> 123 Fashion Street, Kochi, Kerala, India</p>
-          <p><i class="fas fa-phone-alt fa-flip-horizontal"></i> +91 98765 43210</p>
-          <p><i class="fas fa-envelope"></i> info@alaga.com</p>
+      <div class="footer-inner">
+        <div class="footer-col">
+          <a href="../index.html" class="nav-logo">ALAGA</a>
+          <p style="margin-top: 1.5rem;">Celebrating individuality through timeless handloom weaves and radiant
+            imitation jewellery.</p>
         </div>
-
-        <!-- Follow Us -->
-        <div class="footer-col follow">
-          <h5 class="follow-title">Follow Us</h5>
+        <div class="footer-col">
+          <h5>Connect</h5>
           <div class="social-icons">
-            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.threads.net/" target="_blank"><i class="fab fa-threads"></i></a>
-            <a href="https://wa.me/917907650800" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <p>123 Fashion Street, Kochi, Kerala</p>
+          <p>info@alaga.com</p>
+          <p>+91 98765 43210</p>
+        </div>
       </div>
-
-      <!-- Copyright -->
       <div class="footer-bottom">
-        <p>&copy; 2025 ALAGA | Celebrate Individuality</p>
+        <p>&copy; 2026 ALAGA. All rights reserved.</p>
       </div>
-
     </div>
   </footer>
 
-
   <!-- Scripts -->
-  <script src="../gallery/galleryData.js"></script>
+  <script src="galleryData.js"></script>
   <script src="../assets/scripts.js"></script>
 </body>
 

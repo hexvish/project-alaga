@@ -1,72 +1,52 @@
 // galleryData.js
 const galleryData = {
-  dresses: [
+  Dresses: [
     {
-      img: "https://picsum.photos/400/250?random=1",
+      img: "images/dress_1.png",
       title: "Handloom Saree",
       description: "Elegant handwoven saree with traditional patterns."
     },
     {
-      img: "https://picsum.photos/400/250?random=2",
+      img: "images/dress_2.png",
       title: "Cotton Kurta",
       description: "Light and breathable kurta for daily wear."
     },
     {
-      img: "https://picsum.photos/400/250?random=3",
+      img: "images/dress_3.png",
       title: "Designer Lehenga",
       description: "Modern lehenga with traditional embroidery."
     },
     {
-      img: "https://picsum.photos/400/250?random=2",
-      title: "Cotton Kurta",
-      description: "Light and breathable kurta for daily wear."
-    },
-    {
-      img: "https://picsum.photos/400/250?random=3",
-      title: "Designer Lehenga",
-      description: "Modern lehenga with traditional embroidery."
+      img: "images/dress_4.png",
+      title: "Handwoven Scarf",
+      description: "Soft and luxurious scarf made from organic cotton."
     }
   ],
-  jewellery: [
+  Jewellery: [
     {
-      img: "https://picsum.photos/400/250?random=4",
+      img: "images/jewel_1.png",
       title: "Gold Plated Necklace",
       description: "Beautiful imitation necklace for festive occasions."
     },
     {
-      img: "https://picsum.photos/400/250?random=5",
-      title: "Silver Bangles",
-      description: "Stylish bangles with a modern design."
+      img: "images/jewel_2.png",
+      title: "Antique Bangles",
+      description: "Hand-finished bangles with an aged patina."
     },
     {
-      img: "https://picsum.photos/400/250?random=6",
-      title: "Earrings",
-      description: "Elegant earrings to complement your outfit."
-    },
-    {
-      img: "https://picsum.photos/400/250?random=8",
-      title: "Earrings",
-      description: "Elegant earrings to complement your outfit."
+      img: "images/jewel_3.png",
+      title: "Crystal Earrings",
+      description: "Elegant earrings that capture the light beautifully."
     }
   ],
-  others: [
+  Lifestyle: [
     {
-      img: "https://picsum.photos/400/250?random=7",
+      img: "images/lifestyle_1.png",
       title: "Handmade Bag",
       description: "Eco-friendly bag made from natural fibers."
     },
     {
-      img: "https://picsum.photos/400/250?random=8",
-      title: "Home Decor",
-      description: "Traditional craftwork to decorate your home."
-    },
-    {
-      img: "https://picsum.photos/400/250?random=7",
-      title: "Handmade Bag",
-      description: "Eco-friendly bag made from natural fibers."
-    },
-    {
-      img: "https://picsum.photos/400/250?random=8",
+      img: "images/lifestyle_2.png",
       title: "Home Decor",
       description: "Traditional craftwork to decorate your home."
     }

@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ALAGA - Home</title>
+  <title>ALAGA | Celebrate Individuality</title>
 
-  <!-- Google Fonts + Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-
-  <!-- Materialize CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
   <!-- Custom Styles -->
   <link rel="stylesheet" href="assets/styles.css">
@@ -22,154 +20,127 @@
 
 <body>
 
-  <!-- NAVIGATION (replace your current nav) -->
-  <nav id="siteNav" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="index.html" id="navLogo" class="nav-logo">
-        <img src="https://picsum.photos/140/40?random=12" alt="ALAGA Logo">
-      </a>
+  <!-- Navigation -->
+  <nav id="siteNav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">ALAGA</a>
 
-      <!-- Toggle button (mobile) -->
-      <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-        <span class="hamburger" aria-hidden="true"></span>
+      <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
       </button>
 
-      <!-- Links -->
-      <ul id="navLinks" class="nav-links" role="menubar" aria-hidden="true">
-        <li role="none"><a role="menuitem" href="index.html" class="nav-link active">Home</a></li>
-        <li role="none"><a role="menuitem" href="gallery/index.html" class="nav-link">Gallery</a></li>
-        <li role="none"><a role="menuitem" href="contact/index.html" class="nav-link">Contact</a></li>
+      <ul id="navLinks" class="nav-links">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="gallery/index.html" class="nav-link">Gallery</a></li>
+        <li><a href="contact/index.html" class="nav-link">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-
-
   <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-overlay">
-      <div class="hero-content">
-        <h1>Celebrate Individuality</h1>
-        <p>Handloom Dresses & Imitation Jewellery</p>
-        <div class="hero-buttons">
-          <a href="gallery/index.html" class="btn btn-large">View Gallery</a>
-          <a href="contact/index.html" class="btn btn-large">Contact Us</a>
-        </div>
+    <div class="container hero-content fade-in">
+      <p class="text-uppercase">Exquisite Collections</p>
+      <h1>Dawn of <br> Elegance</h1>
+      <p>Handloom Dresses & Imitation Jewellery crafted to celebrate your individuality.</p>
+      <div class="hero-buttons">
+        <a href="gallery/index.html" class="btn">Shop Collection</a>
+        <a href="contact/index.html" class="btn btn-secondary">Contact Us</a>
       </div>
     </div>
-
-    <!-- Scroll Down Indicator -->
-    <a href="#welcome" class="scroll-down">
-      <span></span>
-    </a>
-
-    <!-- Canvas for comets -->
-    <canvas id="cometCanvas"></canvas>
   </section>
 
-
-
   <!-- Welcome Section -->
-  <section class="welcome fade-in">
-    <div class="container">
-      <h2>Welcome to ALAGA</h2>
+  <section class="welcome">
+    <div class="container fade-in">
+      <p class="text-uppercase">Our Story</p>
+      <h2>Timeless Craftsmanship</h2>
       <p>
         Discover the elegance of handloom dresses and the charm of imitation jewellery,
-        crafted to celebrate individuality. Our mission is to blend tradition with modern style,
-        making every piece unique just like you.
+        meticulously crafted to celebrate individuality. Our mission is to blend tradition
+        with modern style, making every piece unique just like you.
       </p>
     </div>
   </section>
 
-
   <!-- Highlights Section -->
-  <div class="container section highlights fade-in">
-    <h2>Our Highlights</h2>
-    <div class="row">
-
-      <!-- Handloom Dresses -->
-      <div class="col s12 m6 l4">
-        <div class="card z-depth-2">
+  <section class="highlights">
+    <div class="container">
+      <div class="grid">
+        <!-- Handloom Dresses -->
+        <div class="card fade-in">
           <div class="card-image">
-            <img src="https://picsum.photos/400/250?random=1" alt="Handloom Dresses">
+            <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=800&auto=format&fit=crop"
+              alt="Handloom Dresses">
           </div>
           <div class="card-content">
-            <span class="card-title">Handloom Dresses</span>
-            <p>Authentic weaves with a modern touch.</p>
+            <p class="text-uppercase">Handloom</p>
+            <h3 class="card-title">Artisanal Weaves</h3>
+            <p>Authentic hand-woven textures that tell a story of heritage and skill.</p>
+            <a href="gallery/index.html" class="btn btn-secondary">Explore</a>
           </div>
-          <div class="card-action">
-            <a href="gallery/index.html" class="btn-card">View Gallery</a>
+        </div>
+
+        <!-- Imitation Jewellery -->
+        <div class="card fade-in">
+          <div class="card-image">
+            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=800&auto=format&fit=crop"
+              alt="Imitation Jewellery">
+          </div>
+          <div class="card-content">
+            <p class="text-uppercase">Jewellery</p>
+            <h3 class="card-title">Radiant Accents</h3>
+            <p>Stunning imitation pieces designed to complement your unique style.</p>
+            <a href="gallery/index.html" class="btn btn-secondary">Explore</a>
+          </div>
+        </div>
+
+        <!-- Custom Design -->
+        <div class="card fade-in">
+          <div class="card-image">
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800&auto=format&fit=crop"
+              alt="Custom Collection">
+          </div>
+          <div class="card-content">
+            <p class="text-uppercase">Bespoke</p>
+            <h3 class="card-title">Curated Style</h3>
+            <p>Personalized selections that resonate with your personal aesthetic.</p>
+            <a href="gallery/index.html" class="btn btn-secondary">Explore</a>
           </div>
         </div>
       </div>
-
-      <!-- Imitation Jewellery -->
-      <div class="col s12 m6 l4">
-        <div class="card z-depth-2">
-          <div class="card-image">
-            <img src="https://picsum.photos/400/250?random=2" alt="Handloom Dresses">
-          </div>
-          <div class="card-content">
-            <span class="card-title">Handloom Dresses</span>
-            <p>Authentic weaves with a modern touch.</p>
-          </div>
-          <div class="card-action">
-            <a href="gallery/index.html" class="btn-card">View Gallery</a>
-          </div>
-        </div>
-      </div>
-      <!-- Traditional Elegance -->
-      <div class="col s12 m6 l4">
-        <div class="card z-depth-2">
-          <div class="card-image">
-            <img src="https://picsum.photos/400/250?random=3" alt="Handloom Dresses">
-          </div>
-          <div class="card-content">
-            <span class="card-title">Handloom Dresses</span>
-            <p>Authentic weaves with a modern touch.</p>
-          </div>
-          <div class="card-action">
-            <a href="gallery/index.html" class="btn-card">View Gallery</a>
-          </div>
-        </div>
-      </div>
-
     </div>
-  </div>
-
+  </section>
 
   <!-- Footer -->
   <footer>
     <div class="container">
-      <div class="footer-row">
-        <!-- Contact Column -->
-        <div class="footer-col contact">
-          <h5>Contact Us</h5>
-          <p><i class="fas fa-map-marker-alt"></i> 123 Fashion Street, Kochi, Kerala, India</p>
-          <p><i class="fas fa-phone-alt fa-flip-horizontal"></i> +91 98765 43210</p>
-          <p><i class="fas fa-envelope"></i> info@alaga.com</p>
+      <div class="footer-inner">
+        <div class="footer-col">
+          <a href="index.html" class="nav-logo">ALAGA</a>
+          <p style="margin-top: 1.5rem;">Celebrating individuality through timeless handloom weaves and radiant
+            imitation jewellery.</p>
         </div>
-
-        <!-- Follow Us -->
-        <div class="footer-col follow">
-          <h5 class="follow-title">Follow Us</h5>
+        <div class="footer-col">
+          <h5>Connect</h5>
           <div class="social-icons">
-            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.threads.net/" target="_blank"><i class="fab fa-threads"></i></a>
-            <a href="https://wa.me/917907650800" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <p>123 Fashion Street, Kochi, Kerala</p>
+          <p>info@alaga.com</p>
+          <p>+91 98765 43210</p>
+        </div>
       </div>
-
-      <!-- Copyright -->
       <div class="footer-bottom">
-        <p>&copy; 2025 ALAGA | Celebrate Individuality</p>
+        <p>&copy; 2026 ALAGA. All rights reserved.</p>
       </div>
-
     </div>
   </footer>
-
 
   <!-- Scripts -->
   <script src="assets/scripts.js"></script>

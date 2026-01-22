@@ -1,209 +1,178 @@
-// -------------------- Fade-in effect --------------------
-document.addEventListener("DOMContentLoaded", () => {
-  const faders = document.querySelectorAll(".fade-in");
+/*
+  Dawn of Alaga - Scripts
+  Modern Interaction Logic
+*/
 
-  const appearOptions = { threshold: 0.2 };
-  const appearOnScroll = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
+document.addEventListener("DOMContentLoaded", () => {
+    initNavigation();
+    initIntersectionObserver();
+    initFAQ();
+    initGallery();
+});
+
+/**
+ * Navigation Logic
+ */
+function initNavigation() {
+    const nav = document.getElementById("siteNav");
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    if (!navToggle || !navLinks) return;
+
+    // Scroll effect
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            nav.classList.add("scrolled");
+        } else {
+            nav.classList.remove("scrolled");
+        }
     });
-  }, appearOptions);
 
-  faders.forEach(fader => appearOnScroll.observe(fader));
-});
-
-// -------------------- Navbar --------------------
-document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.getElementById("navToggle");
-  const links = document.getElementById("navLinks");
-  const nav = document.getElementById("siteNav");
-
-  if (!toggle || !links) return;
-
-  function openMenu() {
-    links.classList.add("open");
-    toggle.classList.add("open");
-    toggle.setAttribute("aria-expanded", "true");
-    links.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeMenu() {
-    links.classList.remove("open");
-    toggle.classList.remove("open");
-    toggle.setAttribute("aria-expanded", "false");
-    links.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-  }
-
-  toggle.addEventListener("click", e => {
-    e.stopPropagation();
-    links.classList.contains("open") ? closeMenu() : openMenu();
-  });
-
-  links.addEventListener("click", e => {
-    if (e.target && e.target.matches("a")) closeMenu();
-  });
-
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") closeMenu();
-  });
-
-  document.addEventListener("click", e => {
-    if (links.classList.contains("open") && !nav.contains(e.target)) closeMenu();
-  });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 768) closeMenu();
-  });
-
-  console.log("Navbar script initialized");
-});
-
-// -------------------- Comet Animation --------------------
-const canvas = document.getElementById("cometCanvas");
-if (canvas) {
-  const ctx = canvas.getContext("2d");
-
-  function resizeCanvas() {
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-  }
-  resizeCanvas();
-  window.addEventListener("resize", resizeCanvas);
-
-  class Comet {
-    constructor() { this.reset(); }
-    reset() {
-      const isMobile = window.innerWidth <= 768;
-      this.x = isMobile ? Math.random() * (canvas.width * 0.4) : Math.random() * canvas.width;
-      this.y = -50;
-      this.vx = 1 + Math.random() * 2;
-      this.vy = isMobile ? (2 + Math.random() * 2) : (3 + Math.random() * 3);
-      this.alpha = 1;
-      this.length = (isMobile ? 40 : 80) + Math.random() * (isMobile ? 40 : 80);
-      this.brightness = 200 + Math.floor(Math.random() * 55);
-      this.lineWidth = Math.random() * 1.5 + 1;
-      this.delay = Math.random() * 2000;
-      this.active = false;
-    }
-    update() {
-      if (this.delay > 0) { this.delay -= 16; return; }
-      this.active = true;
-      this.x += this.vx;
-      this.y += this.vy;
-      this.alpha -= 0.01;
-      if (this.alpha <= 0 || this.y > canvas.height + 100 || this.x > canvas.width + 100) this.reset();
-    }
-    draw() {
-      if (!this.active) return;
-      const gradient = ctx.createLinearGradient(this.x, this.y, this.x - this.length, this.y - this.length);
-      gradient.addColorStop(0, `rgba(${this.brightness},${this.brightness},${this.brightness},${this.alpha})`);
-      gradient.addColorStop(1, "rgba(255,255,255,0)");
-      ctx.strokeStyle = gradient;
-      ctx.lineWidth = this.lineWidth;
-      ctx.beginPath();
-      ctx.moveTo(this.x, this.y);
-      ctx.lineTo(this.x - this.length, this.y - this.length);
-      ctx.stroke();
-    }
-  }
-
-  let comets = Array.from({ length: 10 }, () => new Comet());
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    comets.forEach(c => { c.update(); c.draw(); });
-    requestAnimationFrame(animate);
-  }
-  animate();
+    // Mobile menu toggle
+    navToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("open");
+        const icon = navToggle.querySelector("i");
+        if (navLinks.classList.contains("open")) {
+            icon.classList.replace("fa-bars", "fa-times");
+            navLinks.style.display = "flex";
+            navLinks.style.flexDirection = "column";
+            navLinks.style.position = "absolute";
+            navLinks.style.top = "80px";
+            navLinks.style.left = "0";
+            navLinks.style.width = "100%";
+            navLinks.style.background = "#fff";
+            navLinks.style.padding = "2rem";
+            navLinks.style.borderBottom = "1px solid #e0e0e0";
+        } else {
+            icon.classList.replace("fa-times", "fa-bars");
+            navLinks.style.display = "";
+        }
+    });
 }
 
-// -------------------- Gallery --------------------
-function renderGallery() {
-  const galleryContainer = document.getElementById("gallery");
-  if (!galleryContainer) return;
+/**
+ * Fade-in effect on scroll
+ */
+function initIntersectionObserver() {
+    const faders = document.querySelectorAll(".fade-in");
+    const appearOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
+    };
 
-  if (typeof galleryData === "undefined") {
-    console.error("galleryData.js not loaded. Include it before scripts.js.");
-    return;
-  }
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+        });
+    }, appearOptions);
 
-  // Create structure
-  galleryContainer.innerHTML = `
-    <h2>Our Gallery</h2>
-    <p>Explore our collection of handloom dresses and imitation jewellery.</p>
-    <div class="gallery-tabs"></div>
-    <div class="gallery-content"></div>
-  `;
+    faders.forEach(fader => appearOnScroll.observe(fader));
+}
 
-  const tabsContainer = galleryContainer.querySelector(".gallery-tabs");
-  const contentContainer = galleryContainer.querySelector(".gallery-content");
-  const categories = Object.keys(galleryData);
+/**
+ * FAQ Accordion logic
+ */
+function initFAQ() {
+    const faqQuestions = document.querySelectorAll(".faq-question");
 
-  categories.forEach((category, i) => {
-    const btn = document.createElement("button");
-    btn.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-    btn.className = `gallery-tab ${i === 0 ? "active" : ""}`;
-    btn.dataset.category = category;
-    tabsContainer.appendChild(btn);
+    faqQuestions.forEach(question => {
+        question.addEventListener("click", () => {
+            const answer = question.nextElementSibling;
+            const icon = question.querySelector("i");
+            
+            // Toggle answer
+            if (answer.style.maxHeight) {
+                answer.style.maxHeight = null;
+                icon.classList.replace("fa-minus", "fa-plus");
+            } else {
+                // Close others
+                document.querySelectorAll(".faq-answer").forEach(a => a.style.maxHeight = null);
+                document.querySelectorAll(".faq-question i").forEach(i => i.classList.replace("fa-minus", "fa-plus"));
+                
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                icon.classList.replace("fa-plus", "fa-minus");
+            }
+        });
+    });
+}
 
-    const grid = document.createElement("div");
-    grid.id = `${category}Grid`;
-    grid.className = `gallery-grid ${i === 0 ? "active" : ""}`;
-    contentContainer.appendChild(grid);
+/**
+ * Gallery Rendering Logic
+ */
+function initGallery() {
+    const galleryContainer = document.getElementById("gallery");
+    if (!galleryContainer) return;
 
-    galleryData[category].forEach(item => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <img src="${item.img}" alt="${item.title}">
-        <div class="card-content">
-          <h4>${item.title}</h4>
-          <p>${item.description}</p>
+    if (typeof galleryData === "undefined") {
+        console.error("galleryData.js not loaded.");
+        return;
+    }
+
+    // Set up gallery layout
+    galleryContainer.innerHTML = `
+        <div class="text-center" style="margin-bottom: 4rem;">
+            <p class="text-uppercase">Our Collection</p>
+            <h2 style="font-size: 3rem;">Selected Pieces</h2>
+            <div class="gallery-tabs" style="margin-top: 2rem; display: flex; justify-content: center; gap: 2rem;">
+            </div>
         </div>
-      `;
-      grid.appendChild(card);
-    });
-  });
+        <div id="gallery-grid" class="grid fade-in"></div>
+    `;
 
-  // Switch tabs
-  tabsContainer.addEventListener("click", e => {
-    if (!e.target.classList.contains("gallery-tab")) return;
-    document.querySelectorAll(".gallery-tab").forEach(t => t.classList.remove("active"));
-    document.querySelectorAll(".gallery-grid").forEach(g => g.classList.remove("active"));
-    e.target.classList.add("active");
-    document.getElementById(`${e.target.dataset.category}Grid`).classList.add("active");
-  });
+    const tabsContainer = galleryContainer.querySelector(".gallery-tabs");
+    const grid = galleryContainer.querySelector("#gallery-grid");
+    const categories = Object.keys(galleryData);
+
+    // Create tabs
+    categories.forEach((cat, index) => {
+        const btn = document.createElement("button");
+        btn.textContent = cat;
+        btn.className = "text-uppercase";
+        btn.style.background = "none";
+        btn.style.border = "none";
+        btn.style.cursor = "pointer";
+        btn.style.paddingBottom = "5px";
+        btn.style.borderBottom = index === 0 ? "2px solid #000" : "2px solid transparent";
+        btn.dataset.category = cat;
+        
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".gallery-tabs button").forEach(b => b.style.borderBottom = "2px solid transparent");
+            btn.style.borderBottom = "2px solid #000";
+            renderCategory(cat, grid);
+        });
+        
+        tabsContainer.appendChild(btn);
+    });
+
+    // Render first category
+    renderCategory(categories[0], grid);
 }
 
-document.addEventListener("DOMContentLoaded", renderGallery);
-
-
-
-
-
-// FAQ Toggle
-document.querySelectorAll(".faq-question").forEach(button => {
-  button.addEventListener("click", () => {
-    const faq = button.parentElement;
-    const answer = faq.querySelector(".faq-answer");
-    const isOpen = faq.classList.contains("open");
-
-    // Close all other FAQs
-    document.querySelectorAll(".faq").forEach(f => {
-      f.classList.remove("open");
-      f.querySelector(".faq-answer").style.maxHeight = null;
-      f.querySelector("span").textContent = "+";
-    });
-
-    // Toggle current FAQ
-    if (!isOpen) {
-      faq.classList.add("open");
-      answer.style.maxHeight = answer.scrollHeight + "px";
-      button.querySelector("span").textContent = "-";
-    }
-  });
-});
-
+function renderCategory(category, container) {
+    const items = galleryData[category];
+    container.style.opacity = "0";
+    
+    setTimeout(() => {
+        container.innerHTML = "";
+        items.forEach(item => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.innerHTML = `
+                <div class="card-image">
+                    <img src="${item.img}" alt="${item.title}">
+                </div>
+                <div class="card-content">
+                    <p class="text-uppercase">${category}</p>
+                    <h3 class="card-title">${item.title}</h3>
+                    <p>${item.description}</p>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+        container.style.opacity = "1";
+        container.classList.add("visible");
+    }, 200);
+}
